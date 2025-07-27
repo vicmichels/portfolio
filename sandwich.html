@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Nom du projet] – Vic Michels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Vic Michels</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-single fade-in">
+    <a href="architecture.html" class="back-link">← Retour</a>
+    <h1>Sandwich</h1>
+    <p class="project-subtitle">Projet architectural – ENSAL</p>
+
+    <!-- Maquette principale -->
+    <img src="assets/images/proj2-realisation.png" alt="Photo de la réalisation à l'échelle 1:1" class="project-image" />
+
+    <!-- Description -->
+  <section class="project-description">
+    <h2>Contexte</h2>
+    <p>
+      Ce projet, mené sur le campus de l’<strong>ENSAL</strong>, portait sur la transformation d’un banc en béton existant en une table de pique-nique durable à l’aide d’une structure en bois. Il nous a permis de traverser l’ensemble du processus : du design aux plans, jusqu’à la réalisation concrète.
+    </p>
+
+    <h2>Démarche</h2>
+    <p>
+      À la différence des autres groupes, nous avons fait le choix de respecter totalement l’intégrité du banc, sans le percer ni le détériorer. Nous avons conçu une structure démontable, venant « prendre le banc en sandwich », serrée de part et d’autre, ce qui assure stabilité et réversibilité.
+    </p>
+    <p>
+      Ce système de fixation sans ancrage destructif renforce la durabilité de l’ensemble, le perçage dans le béton étant souvent source de fragilité à long terme. Nous avons également travaillé avec soin les dimensions du mobilier, notamment la distance entre l’assise et le plateau, pour garantir ergonomie et confort.
+    </p>
+    <p>
+      Le design épuré met en valeur la technique d’assemblage, laissée volontairement visible. Le résultat est une table fonctionnelle, solide et largement utilisée, qui traduit l’efficacité et la clarté de notre démarche.
+    </p>
+  </section>
+
+    <!-- Galerie des visuels -->
+    <section class="project-gallery">
+      <h2>Plans d'assemblage et images</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <img src="assets/images/proj2-detail.jpg" alt="Détail" />
+                <img src="assets/images/proj2-maquette.jpg" alt="Maquette" />
+                <img src="assets/images/proj2-etape1.png" alt="Etape 1" />
+                <img src="assets/images/proj2-etape2.png" alt="Etape 2" />
+                <img src="assets/images/proj2-etape3.png" alt="Etape 3" />
+                <img src="assets/images/proj2-etape4.png" alt="Etape 4" />
+                <img src="assets/images/proj2-etape5.png" alt="Etape 5" />
+                <img src="assets/images/proj2-dessus.png" alt="Dessus" />
+                <img src="assets/images/proj2-dessous.png" alt="Dessous" />
+                <img src="assets/images/proj2-coté.png" alt="Côté" />
+                <img src="assets/images/proj2-face.png" alt="Face" />
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="closeLightbox">×</span>
+        <img src="" alt="Agrandissement" id="lightboxImg" />
+    </div>
+
+  <footer>
+    <p>© Vic Michels – Tous droits réservés</p>
+  </footer>
+  <script src="assets/js/scroll.js"></script>
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = track.querySelectorAll('img');
+    let current = 0;
+
+    setInterval(() => {
+        current = (current + 1) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+    }, 3000); // change d'image toutes les 3 secondes
+    </script>
+
+    <script>
+        const carouselImages = document.querySelectorAll('.carousel-track img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeLightbox = document.getElementById('closeLightbox');
+
+        carouselImages.forEach(img => {
+            img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.style.display = 'flex';
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+            }
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Nom du projet] – Vic Michels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Vic Michels</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-single fade-in">
+    <a href="architecture.html" class="back-link">← Retour</a>
+    <h1>Lumière Légère, Obscurité Douce</h1>
+    <p class="project-subtitle">Projet architectural – ENSAL</p>
+
+    <!-- Maquette principale -->
+    <img src="assets/images/proj1-maquette.png" alt="Photo de maquette" class="project-image" />
+
+    <!-- Description -->
+    <section class="project-description">
+      <h2>Contexte</h2>
+      <p>
+        Ce projet de première année visait à nous confronter aux fondamentaux de la conception architecturale à travers un exercice réaliste : implanter une maison individuelle sur un terrain en pente, avec une contrainte d’emprise au sol limitée. L’objectif était d’apprendre à composer avec un site, ses contraintes topographiques et climatiques.
+      </p>
+      <p>
+        J’ai choisi de développer le projet sur deux niveaux, afin de respecter les limites réglementaires tout en accompagnant le relief naturel du terrain. Cette implantation permet à la maison de s’intégrer harmonieusement dans le paysage, en créant une architecture discrète mais expressive.
+      </p>
+      <p>
+        L’espace de vie est orienté plein sud, avec une grande baie vitrée qui offre une vue dégagée sur la vallée. À l’arrière, la partie nord étant en partie enterrée, un puits de lumière a été intégré au centre de la maison. Il permet d’apporter de la lumière naturelle dans les espaces les plus profonds, tout en assurant une connexion visuelle et spatiale entre les deux étages grâce à une ouverture protégée par des garde-corps.
+      </p>
+
+      <h2>Démarche</h2>
+      <p>
+        Le puits de lumière constitue un élément central du projet, tant sur le plan spatial que fonctionnel. Situé au cœur de la maison, il perce verticalement les deux niveaux, créant une ouverture visuelle et physique entre les étages. Cette disposition permet à la lumière naturelle de traverser la maison en profondeur, notamment dans les espaces situés à l’arrière du premier étage, qui seraient autrement peu éclairés en raison de leur orientation nord et de leur intégration partielle dans le sol.
+      </p>
+      <p>
+        En hiver, le puits capte les rayons bas du soleil, contribuant à chauffer passivement les espaces intérieurs, tandis qu’en été, son positionnement et son traitement limitent l’exposition directe, évitant les surchauffes. Au-delà de sa fonction lumineuse, il agit comme un espace de respiration intérieure, apportant une qualité spatiale supplémentaire et renforçant la relation entre les différents niveaux de la maison.
+      </p>
+    </section>
+
+    <!-- Galerie des visuels -->
+    <section class="project-gallery">
+      <h2>Plans & croquis</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <img src="assets/images/proj1-plan1.png" alt="Plan 1" />
+                <img src="assets/images/proj1-plan2.png" alt="Plan 2" />
+                <img src="assets/images/proj1-croquis.png" alt="Croquis" />
+                <img src="assets/images/proj1-coupes1.png" alt="Coupes 1" />
+                <img src="assets/images/proj1-coupes2.png" alt="Coupes 2" />
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="closeLightbox">×</span>
+        <img src="" alt="Agrandissement" id="lightboxImg" />
+    </div>
+
+  <footer>
+    <p>© Vic Michels – Tous droits réservés</p>
+  </footer>
+  <script src="assets/js/scroll.js"></script>
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = track.querySelectorAll('img');
+    let current = 0;
+
+    setInterval(() => {
+        current = (current + 1) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+    }, 3000); // change d'image toutes les 3 secondes
+    </script>
+
+    <script>
+        const carouselImages = document.querySelectorAll('.carousel-track img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeLightbox = document.getElementById('closeLightbox');
+
+        carouselImages.forEach(img => {
+            img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.style.display = 'flex';
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+            lightboxImg.src = '';
+            }
+        });
+    </script>
+
+
+</body>
+</html>
