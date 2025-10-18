@@ -201,6 +201,51 @@ button.cta:focus {
   display: block;
 }
 
+/* Style des logos d'écoles */
+.logo-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem; 
+    margin: 3rem 0;
+    padding: 1rem 0;
+}
+
+.logo-gallery img {
+    max-width: 150px; 
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+}
+
+.logo-gallery img:hover {
+    opacity: 1;
+}
+
+/* Style des cartes de localisation */
+.map-container {
+    text-align: center;
+    margin: 3rem auto;
+}
+
+.map-image {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+}
+
+.map-caption {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+
 /* Projects Index Page (projects.html) */
 .projects-container {
   max-width: 900px;
@@ -367,8 +412,8 @@ button.cta:focus {
   gap: 1.5rem; 
   margin-bottom: 3rem;
   justify-content: center; 
-  flex-wrap: nowrap; /* Force la ligne unique */
-  overflow-x: auto; /* Permet le défilement horizontal */
+  flex-wrap: nowrap;
+  overflow-x: auto;
   padding-bottom: 10px; 
 }
 
@@ -643,7 +688,7 @@ footer {
   .projects-detail,
   .contact-container,
   .project-single {
-      padding: 1.5rem 2rem; 
+      padding: 1.5rem 2rem; /* Réduction du padding-top sur mobile */
   }
 
   /* Projects */
