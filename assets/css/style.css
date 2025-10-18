@@ -356,7 +356,7 @@ button.cta:focus {
 .project-images-five {
   display: grid;
   /* Crée 3 colonnes de taille égale, avec un gap de 1rem */
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(5, 1fr); 
   gap: 1rem;
   margin-bottom: 2rem;
   /* Centre le bloc de la grille */
