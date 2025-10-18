@@ -339,6 +339,57 @@ button.cta:focus {
   margin-right: auto;
 }
 
+/* ------------------------------------------------ */
+/* RETABLISSEMENT: Affichage de deux images (TWSS, Pente-à-vis) */
+/* ------------------------------------------------ */
+.project-images-double {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* Assure le centrage pour deux images */
+}
+
+.project-images-double img {
+  width: 100%;
+  max-width: 250px; /* Taille légèrement augmentée pour 2 images */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+/* ------------------------------------------------ */
+
+/* GRILLE RESTONOME: Desktop (3 images) */
+.project-images-grid {
+  display: grid;
+  max-width: 720px; 
+  margin: 2rem auto;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; 
+  margin-bottom: 3rem;
+  justify-content: center; 
+}
+
+.project-images-grid img {
+  justify-self: center; 
+  width: 100%; 
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* CARROUSEL RESTONOME: Mobile (Par défaut masqué) */
+.project-images-carousel {
+    display: none;
+}
+/* ANCIENNES CLASSES DE GRILLE (Masqué pour éviter les conflits) */
+.project-images-five, .project-images-double.grid-style {
+  display: none; 
+}
+
+
 .project-description {
   text-align: left;
 }
@@ -418,44 +469,7 @@ button.cta:focus {
   outline: none;
 }
 
-/* ------------------------------------------------ */
-/* SECTION : Grille d'images (pour l'application Restonome) */
-/* ------------------------------------------------ */
-.project-images-grid {
-  display: grid;
-  max-width: 720px; 
-  margin: 2rem auto;
-  /* Crée 3 colonnes de taille égale (1fr) */
-  grid-template-columns: repeat(5, 1fr); 
-  gap: 1.5rem; 
-  margin-bottom: 3rem;
-  justify-content: center; 
-}
-
-.project-images-grid img {
-  justify-self: center; 
-  width: 100%; 
-  max-width: 200px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-/* NOUVEAU: Cache le carrousel par défaut sur Desktop */
-.project-images-carousel {
-    display: none;
-}
-/* ANCIENNE classe de grille si vous l'utilisez encore quelque part */
-.project-images-double {
-  display: none; /* Masqué pour éviter les conflits avec la nouvelle grille */
-}
-/* ANCIENNE classe que vous avez utilisée dans l'exemple */
-.project-images-five {
-  display: none; /* Masqué pour éviter les conflits */
-}
-
-
-/* 7. Gallery & Lightbox (Styles du carrousel et des boutons) */
+/* 7. Gallery & Lightbox */
 .project-gallery {
   margin-top: 2rem;
 }
@@ -637,7 +651,7 @@ footer {
   .text-content {
     min-width: unset;
   }
-  
+
   /* TRANSITION GRILLE -> CARROUSEL */
   .project-images-grid {
     display: none; 
@@ -646,6 +660,16 @@ footer {
   .project-images-carousel {
     display: block; 
     padding: 0 2rem; 
+  }
+  
+  /* Retablissement: Sur mobile, les images doubles passent à une colonne */
+  .project-images-double {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem; /* Plus d'espace vertical */
+  }
+  .project-images-double img {
+      max-width: 80%;
   }
 
   /* Ajustements du carrousel sur Mobile */
@@ -658,11 +682,5 @@ footer {
   .dot {
     width: 10px;
     height: 10px;
-  }
-}
-/* Dernière media query si l'écran est très petit */
-@media (max-width: 480px) {
-  .project-images-grid {
-    grid-template-columns: 1fr; 
   }
 }
