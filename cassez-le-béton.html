@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cassez Le Béton – Vic Michels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Vic Michels</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-single fade-in">
+    <a href="architecture.html" class="back-link">← Retour</a>
+    <h1>Cassez Le Béton</h1>
+    <p class="project-subtitle">Projet architectural – ENSAL</p>
+
+    <div class="project-images-double">
+        <img src="assets/images/proj4-maquette1.png" alt="Maquette 1" />
+        <img src="assets/images/proj4-maquette5.png" alt="Maquette 2" />
+    </div>
+    <!-- Description -->
+<section class="project-description">
+<h2>Contexte et Objectif</h2>
+<p>
+Ce projet, mené sur le campus de l’<strong>ENSAL</strong>, portait sur la réhabilitation d'un élément existant. L'objectif était de transformer un banc en béton désuet en une table de pique-nique durable grâce à l'ajout d'une <strong>structure en bois</strong>. Ce processus nous a permis de maîtriser l'intégralité de la chaîne de production : du design initial aux plans d'exécution, jusqu'à la <strong>réalisation concrète à l'échelle 1:1</strong></strong>.
+</p>
+
+<h2>Démarche Technique : Fixation Réversible et Durable</h2>
+<p>
+Notre principal parti pris technique a été de garantir l'<strong>intégrité totale du banc en béton</strong>. Contrairement aux méthodes destructives (perçage), nous avons développé une structure <strong>démontable et réversible</strong>.
+ </p>
+<p>
+Le système de fixation, d'où le nom "Sandwich," repose sur un assemblage qui vient <strong>serrer le banc de part et d'autre</strong>. Ce dispositif simple assure à la fois une <strong>stabilité maximale</strong> et la <strong>réversibilité</strong> du mobilier. Ce choix technique renforce la durabilité de l'ensemble, car l'ancrage sans perçage évite la fragilisation du béton à long terme.
+</p>
+    
+    <h3>Design et Clarté</h3>
+    <p>
+      Le <strong>design épuré</strong> de la structure met en évidence la technique d’assemblage elle-même, celle-ci étant volontairement laissée visible. Simultanément, nous avons optimisé l'<strong>ergonomie</strong> du mobilier en ajustant avec précision la distance entre l’assise et le plateau, garantissant confort et fonctionnalité. Le résultat est une table solide, largement utilisée sur le campus, et qui illustre l'efficacité et la clarté de notre démarche conceptuelle et constructive.
+    </p>
+
+</section>
+
+  <!-- Galerie des visuels -->
+  <section class="project-gallery">
+    <h2>Plans d'assemblage et images</h2>
+        <div class="carousel-container">
+            <button class="nav-button prev-button">←</button>
+            <button class="nav-button next-button">→</button>
+
+            <div class="carousel-track">
+                <img src="assets/images/proj4-maquette1.png" alt="Maquette vue 1" />
+                <img src="assets/images/proj4-maquette2.png" alt="Maquette vue 2" />
+                <img src="assets/images/proj4-maquette3.jpg" alt="Maquette vue 3" />
+                <img src="assets/images/proj4-maquette4.jpg" alt="Maquette vue 4" />
+                <img src="assets/images/proj4-maquette5.png" alt="Maquette vue 5" />
+                <img src="assets/images/proj4-maquette6.png" alt="Maquette vue 6" />
+                <img src="assets/images/proj4-exterieur.jpg" alt="Maquette detail" />
+                <img src="assets/images/proj4-interieur1.jpg" alt="Maquette intérieur vue 1" />              
+                <img src="assets/images/proj4-interieur2.jpg" alt="Maquette intérieur vue 2" />   
+                <img src="assets/images/proj4-interieur3.jpg" alt="Maquette intérieur vue 3" />   
+ 
+            </div>
+            
+            <div class="carousel-dots"></div>
+            
+        </div>
+    </section>
+  </main>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="closeLightbox">×</span>
+        <img src="" alt="Agrandissement" id="lightboxImg" />
+    </div>
+
+  <footer>
+    <p>© Vic Michels – Tous droits réservés</p>
+  </footer>
+  <script src="assets/js/scroll.js"></script>
+    <script>
+    const carouselContainer = document.querySelector('.carousel-container');
+    const track = document.querySelector('.carousel-track');
+    const slides = track.querySelectorAll('img');
+    const totalSlides = slides.length;
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    
+    let current = 0;
+    let autoScrollInterval;
+    const autoScrollDuration = 3000; // 3 secondes
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Distance minimum (en pixels) pour valider un glissement
+
+    // --- Fonction de base pour le défilement ---
+    function updateCarousel() {
+        // Défilement de la piste
+        track.style.transform = `translateX(-${current * 100}%)`;
+        
+        // Mise à jour des indicateurs de position
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === current);
+        });
+    }
+
+    // --- Création des indicateurs de position (dots) ---
+    function createDots() {
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                stopAutoScroll();
+                current = index;
+                updateCarousel();
+                resetAutoScroll();
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    // --- Fonctions de navigation ---
+    function moveToNextSlide() {
+        current = (current + 1) % totalSlides;
+        updateCarousel();
+    }
+
+    function moveToPrevSlide() {
+        current = (current - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    // --- Gestion de l'Autoscroll ---
+    function startAutoScroll() {
+        // S'assurer qu'un seul intervalle est actif
+        stopAutoScroll(); 
+        autoScrollInterval = setInterval(moveToNextSlide, autoScrollDuration);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+    
+    // Réinitialise l'intervalle après une action manuelle
+    function resetAutoScroll() {
+        startAutoScroll();
+    }
+    
+    // --- Gestion du Touch/Swipe ---
+    carouselContainer.addEventListener('touchstart', (e) => {
+        // Pause auto-scroll when touch starts
+        stopAutoScroll(); 
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true}); // {passive: true} améliore la performance sur mobile
+
+    carouselContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        // Resume auto-scroll after swipe attempt
+        resetAutoScroll(); 
+    });
+
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+
+        if (Math.abs(deltaX) > swipeThreshold) {
+            if (deltaX > 0) {
+                // Glissement vers la droite (affiche la slide précédente)
+                moveToPrevSlide();
+            } else {
+                // Glissement vers la gauche (affiche la slide suivante)
+                moveToNextSlide();
+            }
+        }
+    }
+    
+    // --- Initialisation des événements ---
+    // Clics manuels des boutons
+    prevButton.addEventListener('click', () => {
+        stopAutoScroll();
+        moveToPrevSlide();
+        resetAutoScroll();
+    });
+
+    nextButton.addEventListener('click', () => {
+        stopAutoScroll();
+        moveToNextSlide();
+        resetAutoScroll();
+    });
+    
+    // Démarrage initial
+    createDots();
+    startAutoScroll();
+
+    // --- Code Lightbox existant (à conserver) ---
+    const carouselImages = document.querySelectorAll('.carousel-track img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLightbox = document.getElementById('closeLightbox');
+
+    carouselImages.forEach(img => {
+        img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+        // Empêcher l'autoscroll pendant la lightbox
+        stopAutoScroll(); 
+        });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        startAutoScroll(); // Redémarrer l'autoscroll
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        startAutoScroll(); // Redémarrer l'autoscroll
+        }
+    });
+    </script>
+
+
+
+</body>
+</html>

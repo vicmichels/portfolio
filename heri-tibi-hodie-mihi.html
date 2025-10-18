@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Nom du projet] – Vic Michels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Vic Michels</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="project-single fade-in">
+    <a href="architecture.html" class="back-link">← Retour</a>
+    <h1>Heri Tibi Hodie Mihi</h1>
+    <p class="project-subtitle">Projet architectural – ENSAL</p>
+
+    <!-- Maquette principale -->
+    <img src="assets/images/proj3_maquette1.png" alt="Photo de maquette" class="project-image" />
+
+    <!-- Description -->
+<section class="project-description">
+<h2>Contexte</h2>
+ <p>
+Ce projet de groupe de première année à l'ENSAL avait pour objectif principal l'étude et la mise en œuvre de la <strong>construction en masse</strong>. Le défi consistait à concevoir un musée directement implanté sur un site de fouilles archéologiques, en respectant des contraintes strictes liées à l'emprise au sol, à la portance des murs et à l'intégration paysagère.
+ </p>
+
+<h2>Démarche Architecturale : Dialogue entre Passé et Présent</h2>
+<p>
+Notre concept vise à établir un dialogue respectueux entre l'architecture contemporaine et le site historique qu'elle protège. La <strong>construction en masse</strong> est utilisée non seulement pour répondre aux contraintes structurelles, mais aussi pour rappeler les techniques ancestrales.
+</p>
+
+<h3>Fluidité et Lumière</h3>
+<p>
+Pour garantir une <strong>circulation fluide et intuitive</strong>, la cage d'escalier a été centralisée dans un noyau indépendant, desservant efficacement les deux corps du bâtiment. Cette disposition optimise l'expérience visiteur et l'accès aux différentes zones d'exposition.
+</p>
+<p>
+L'utilisation de la <strong>voûte en arc</strong> n'est pas un simple choix esthétique ; elle structure les espaces intérieurs et établit un lien formel direct avec les vestiges archéologiques environnants, créant une ambiance muséale intime et résonante.
+ </p>
+
+<h3>Jeu des Façades et de la Climatisation Passive</h3>
+<ul>
+ <li>
+ La <strong>façade Sud-Est</strong> (façade d'entrée) est volontairement pleine et peu percée. Cette masse agit comme une protection symbolique du site et contribue à l'inertie thermique du bâtiment.
+ </li>
+<li>
+La <strong>façade Nord-Ouest</strong> est largement vitrée, offrant une vue dégagée et un éclairage naturel abondant sur la zone de fouilles, positionnant l'objet de l'exposition comme le point focal de l'espace.
+</li>
+<li>
+Les façades Nord-Est et Sud-Ouest intègrent des ouvertures <strong>irrégulières et de petite taille</strong>. Cette disposition rappelle les méthodes de construction anciennes (évocation des vestiges) tout en permettant une <strong>lumière intime</strong> et en limitant l'apport de chaleur pour une <strong>gestion thermique passive</strong>.
+ </li>
+ </ul>
+</section>
+
+  <!-- Galerie des visuels -->
+  <section class="project-gallery">
+        <h2>Plans & croquis</h2>
+          <div class="carousel-container">
+              <button class="nav-button prev-button">←</button>
+              <button class="nav-button next-button">→</button>
+              
+              <div class="carousel-track">
+                    <img src="assets/images/proj3_maquette1.png" alt="Image maquette 1" />
+                    <img src="assets/images/proj3_maquette2.png" alt="Image maquette 2" />
+                    <img src="assets/images/proj3_maquette3.png" alt="Image maquette 3" />
+                    <img src="assets/images/proj3_plan_situation1.jpg" alt="Plan de situation 1" />
+                    <img src="assets/images/proj3_plan_situation2.jpg" alt="Plan de situation 2" />
+                    <img src="assets/images/proj3_plan_situation3.jpg" alt="Plan de situation 3" />
+                    <img src="assets/images/proj3_plan_situation4.jpg" alt="Plan de situation 4" />
+                    <img src="assets/images/proj3_plan_masse1.png" alt="Plan de masse 1" />
+                    <img src="assets/images/proj3_plan_masse2.png" alt="Plan de masse 2" />
+                    <img src="assets/images/proj3_plan0.png" alt="Plan 0" />
+                    <img src="assets/images/proj3_plan1.png" alt="Plan 1" />
+                    <img src="assets/images/proj3_plan2.png" alt="Plan 2" />
+                    <img src="assets/images/proj3_coupe.png" alt="Coupe" />
+                    <img src="assets/images/proj3_Perspective facade.jpg" alt="Perspective façade" />
+                    <img src="assets/images/proj3_elevation1.png" alt="Elevation" />
+
+              </div>
+              
+              <div class="carousel-dots"></div>
+              
+          </div>
+      </section>
+
+  </main>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="closeLightbox">×</span>
+        <img src="" alt="Agrandissement" id="lightboxImg" />
+    </div>
+
+  <footer>
+    <p>© Vic Michels – Tous droits réservés</p>
+  </footer>
+  <script src="assets/js/scroll.js"></script>
+    <script>
+    const carouselContainer = document.querySelector('.carousel-container');
+    const track = document.querySelector('.carousel-track');
+    const slides = track.querySelectorAll('img');
+    const totalSlides = slides.length;
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    
+    let current = 0;
+    let autoScrollInterval;
+    const autoScrollDuration = 3000; // 3 secondes
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Distance minimum (en pixels) pour valider un glissement
+
+    // --- Fonction de base pour le défilement ---
+    function updateCarousel() {
+        // Défilement de la piste
+        track.style.transform = `translateX(-${current * 100}%)`;
+        
+        // Mise à jour des indicateurs de position
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === current);
+        });
+    }
+
+    // --- Création des indicateurs de position (dots) ---
+    function createDots() {
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                stopAutoScroll();
+                current = index;
+                updateCarousel();
+                resetAutoScroll();
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    // --- Fonctions de navigation ---
+    function moveToNextSlide() {
+        current = (current + 1) % totalSlides;
+        updateCarousel();
+    }
+
+    function moveToPrevSlide() {
+        current = (current - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    // --- Gestion de l'Autoscroll ---
+    function startAutoScroll() {
+        // S'assurer qu'un seul intervalle est actif
+        stopAutoScroll(); 
+        autoScrollInterval = setInterval(moveToNextSlide, autoScrollDuration);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+    
+    // Réinitialise l'intervalle après une action manuelle
+    function resetAutoScroll() {
+        startAutoScroll();
+    }
+    
+    // --- Gestion du Touch/Swipe ---
+    carouselContainer.addEventListener('touchstart', (e) => {
+        // Pause auto-scroll when touch starts
+        stopAutoScroll(); 
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true}); // {passive: true} améliore la performance sur mobile
+
+    carouselContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        // Resume auto-scroll after swipe attempt
+        resetAutoScroll(); 
+    });
+
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+
+        if (Math.abs(deltaX) > swipeThreshold) {
+            if (deltaX > 0) {
+                // Glissement vers la droite (affiche la slide précédente)
+                moveToPrevSlide();
+            } else {
+                // Glissement vers la gauche (affiche la slide suivante)
+                moveToNextSlide();
+            }
+        }
+    }
+    
+    // --- Initialisation des événements ---
+    // Clics manuels des boutons
+    prevButton.addEventListener('click', () => {
+        stopAutoScroll();
+        moveToPrevSlide();
+        resetAutoScroll();
+    });
+
+    nextButton.addEventListener('click', () => {
+        stopAutoScroll();
+        moveToNextSlide();
+        resetAutoScroll();
+    });
+    
+    // Démarrage initial
+    createDots();
+    startAutoScroll();
+
+    // --- Code Lightbox existant (à conserver) ---
+    const carouselImages = document.querySelectorAll('.carousel-track img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLightbox = document.getElementById('closeLightbox');
+
+    carouselImages.forEach(img => {
+        img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+        // Empêcher l'autoscroll pendant la lightbox
+        stopAutoScroll(); 
+        });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        startAutoScroll(); // Redémarrer l'autoscroll
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        startAutoScroll(); // Redémarrer l'autoscroll
+        }
+    });
+    </script>
+
+</body>
+</html>
