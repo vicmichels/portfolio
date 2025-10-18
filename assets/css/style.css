@@ -353,6 +353,32 @@ button.cta:focus {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
+.project-images-five {
+  display: grid;
+  /* Crée 3 colonnes de taille égale, avec un gap de 1rem */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1rem;
+  margin-bottom: 2rem;
+  /* Centre le bloc de la grille */
+  justify-content: center; 
+}
+
+.project-images-five img {
+  /* Assure que les images sont centrées dans leur cellule de grille */
+  justify-self: center; 
+  width: 100%; 
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Gère la réactivité sur les petits écrans pour passer à 2 colonnes */
+@media (max-width: 650px) {
+  .project-images-five {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 .project-description {
   text-align: left;
