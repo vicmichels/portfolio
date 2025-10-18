@@ -18,7 +18,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   font-weight: 300;
-  overflow-y: scroll; /* Assurer une barre de défilement constante */
+  overflow-y: scroll;
 }
 
 /* 2. Navigation */
@@ -154,7 +154,7 @@ button.cta:focus {
 .projects-detail,
 .contact-container,
 .project-single {
-  max-width: 720px; /* Base container width for content pages */
+  max-width: 720px;
   margin: 0 auto;
   padding: 6rem 2rem;
 }
@@ -203,7 +203,7 @@ button.cta:focus {
 
 /* Projects Index Page (projects.html) */
 .projects-container {
-  max-width: 900px; /* Plus large pour les cartes */
+  max-width: 900px;
   text-align: center;
 }
 
@@ -255,7 +255,7 @@ button.cta:focus {
 
 /* Projects Detail Pages (engineering.html, architecture.html) */
 .projects-detail {
-  max-width: 1000px; /* Plus large pour la grille de projets */
+  max-width: 1000px;
   text-align: center;
 }
 
@@ -266,7 +266,7 @@ button.cta:focus {
 
 .project-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Trois colonnes par défaut, plus logique */
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
   margin-top: 4rem;
   text-align: left;
@@ -274,7 +274,7 @@ button.cta:focus {
 
 .project-grid .project-card {
   padding: 2rem;
-  text-align: left; /* Aligner le texte à gauche dans la grille */
+  text-align: left;
 }
 
 .project-grid .project-card img {
@@ -335,7 +335,7 @@ button.cta:focus {
   border-radius: 8px;
   margin-bottom: 2rem;
   display: block;
-  margin-left: auto; /* Correction du décalage */
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -355,7 +355,7 @@ button.cta:focus {
 }
 
 .project-description {
-  text-align: left; /* Alignement du texte de description */
+  text-align: left;
 }
 
 .project-description h2 {
@@ -438,28 +438,33 @@ button.cta:focus {
   margin-top: 2rem;
 }
 
+/* ------------------------------------------------ */
+/* CAROUSEL : Taille adaptable du carrousel et images */
+/* ------------------------------------------------ */
 .carousel-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 720px;
   margin: 2rem auto;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  aspect-ratio: 3 / 2;
   position: relative;
+  height: auto; 
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.6s ease-in-out;
-  height: 100%;
+  height: auto;
+  align-items: center;
 }
 
 .carousel-track img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain; 
   flex-shrink: 0;
+  max-height: 500px;
 }
 
 .lightbox {
@@ -488,6 +493,77 @@ button.cta:focus {
   cursor: pointer;
 }
 
+/* ------------------------------------------------ */
+/* CAROUSEL : Styles UNIFORMES des boutons (rond, blanc) */
+/* ------------------------------------------------ */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.5rem;
+  
+  /* Style rond et blanc (anciennement style mobile) */
+  height: 48px;
+  width: 48px;
+  background: rgba(255, 255, 255, 0.9); 
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  color: var(--text-color);
+  
+  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 1;
+}
+
+/* Effet de survol : le fond devient légèrement plus opaque */
+.nav-button:hover {
+  background: rgba(255, 255, 255, 1); 
+  color: var(--text-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+.prev-button {
+  left: 1rem;
+}
+
+.next-button {
+  right: 1rem;
+}
+
+/* Styles des indicateurs de position (dots) */
+.carousel-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+
 /* 8. Utility & Footer */
 /* Fade-in effect */
 .fade-in {
@@ -510,9 +586,9 @@ footer {
 
 /* 9. Responsiveness */
 @media (max-width: 900px) {
-    .project-grid {
-        grid-template-columns: 1fr 1fr; /* Deux colonnes sous 900px */
-    }
+  .project-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -531,85 +607,24 @@ footer {
     grid-template-columns: 1fr;
   }
   .project-grid {
-    grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    grid-template-columns: 1fr;
   }
 
   /* About */
   .intro-with-image {
-    flex-direction: column; /* Empilement sur mobile */
+    flex-direction: column;
     align-items: flex-start;
   }
   .portrait-inline {
     margin-left: 0;
   }
   .text-content {
-      /* Réaligner le texte si le flex-wrap l'a décalé */
-      min-width: unset;
+    min-width: unset;
   }
 
-  /* --- Nouveaux Styles pour le Carrousel --- */
-.carousel-container {
-    position: relative; /* Clé pour positionner les flèches */
-}
-
-/* Styles des boutons de navigation (flèches) */
-.nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.7);
-    border: none;
-    padding: 0.5rem 0.8rem;
-    cursor: pointer;
-    z-index: 10;
-    font-size: 1.5rem;
-    color: var(--text-color);
-    border-radius: 50%;
-    transition: background 0.3s, color 0.3s;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.nav-button:hover {
-    background: var(--text-color);
-    color: var(--bg-color);
-}
-
-.prev-button {
-    left: 1rem;
-}
-
-.next-button {
-    right: 1rem;
-}
-
-/* Styles des indicateurs de position (dots) */
-.carousel-dots {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
-    z-index: 10;
-}
-
-.dot {
+  /* Ajustements spécifiques mobile */
+  .dot {
     width: 10px;
     height: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid #aaa;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s;
-}
-
-.dot.active {
-    background: var(--accent-color);
-    border-color: var(--accent-color);
-}
+  }
 }
