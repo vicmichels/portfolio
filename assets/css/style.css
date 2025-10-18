@@ -156,7 +156,7 @@ button.cta:focus {
 .project-single {
   max-width: 720px;
   margin: 0 auto;
-  padding: 3rem 2rem; /* CORRECTION: Espace réduit en haut */
+  padding: 3rem 2rem; /* Espace principal des conteneurs (Desktop) */
 }
 
 /* About Page (about.html) */
@@ -375,7 +375,7 @@ button.cta:focus {
 .project-images-grid img {
   flex-shrink: 0; 
   width: 100%; 
-  max-width: 110px; /* Taille ajustée pour 5 images sur une ligne */
+  max-width: 110px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
@@ -635,6 +635,15 @@ footer {
   .nav-links {
     margin-top: 1rem;
     gap: 1.5rem;
+  }
+  
+  /* CORRECTION CRITIQUE: Réduit le padding-top des pages sur mobile */
+  .about-container,
+  .projects-container,
+  .projects-detail,
+  .contact-container,
+  .project-single {
+      padding: 1.5rem 2rem; 
   }
 
   /* Projects */
