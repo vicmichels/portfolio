@@ -552,58 +552,58 @@ footer {
       position: relative; /* Clé pour positionner les flèches */
   }
 
-  /* Styles des boutons de navigation (flèches) - Style Moderne */
-  .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 10;
-      font-size: 2.2rem; /* Flèche plus grande et impactante */
-      color: #444; /* Gris foncé, moins dur que le noir */
-      transition: color 0.3s, background-color 0.3s, opacity 0.3s;
-      height: 60px; 
-      width: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      opacity: 0.8;
-  }
+/* Styles des boutons de navigation (flèches) - Style Moderne */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 2.2rem; /* Flèche plus grande et impactante */
+    color: #444; /* Gris foncé, moins dur que le noir */
+    transition: color 0.3s, background-color 0.3s, opacity 0.3s;
+    height: 60px; 
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    opacity: 0.8;
+}
 
-  /* Effet de survol : le fond devient légèrement visible */
-  .nav-button:hover {
-      background: rgba(0, 0, 0, 0.05); /* Très léger fond gris/noir */
-      color: var(--text-color);
-      border-radius: 5px;
-      opacity: 1;
-  }
+/* Effet de survol : le fond devient légèrement visible */
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.05); /* Très léger fond gris/noir */
+    color: var(--text-color);
+    border-radius: 5px;
+    opacity: 1;
+}
 
-  .prev-button {
-      left: 1rem;
-  }
+.prev-button {
+    left: 1rem;
+}
 
-  .next-button {
-      right: 1rem;
-  }
+.next-button {
+    right: 1rem;
+}
 
-  /* Styles pour mobile/petits écrans : rendre les boutons tactiles */
-  @media (max-width: 768px) {
-      .nav-button {
-          height: 48px;
-          width: 48px;
-          font-size: 1.5rem;
-          background: rgba(255, 255, 255, 0.9); /* Fond blanc plus visible sur mobile */
-          border-radius: 50%; /* Bouton rond */
-          box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-          color: var(--text-color);
-      }
-      .nav-button:hover {
-          background: rgba(255, 255, 255, 1);
-      }
-  }
+/* Styles pour mobile/petits écrans : rendre les boutons tactiles */
+@media (max-width: 768px) {
+    .nav-button {
+        height: 48px;
+        width: 48px;
+        font-size: 1.5rem;
+        background: rgba(255, 255, 255, 0.9); /* Fond blanc plus visible sur mobile */
+        border-radius: 50%; /* Bouton rond */
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        color: var(--text-color);
+    }
+    .nav-button:hover {
+         background: rgba(255, 255, 255, 1);
+    }
+}
 
 
   /* Styles des indicateurs de position (dots) */
