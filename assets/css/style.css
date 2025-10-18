@@ -5,6 +5,7 @@
   --font: 'Space Grotesk', sans-serif;
 }
 
+/* 1. Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -17,14 +18,21 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   font-weight: 300;
+  overflow-y: scroll; /* Assurer une barre de défilement constante */
 }
 
+/* 2. Navigation */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 4vw;
   font-weight: 500;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .nav-links {
@@ -43,11 +51,37 @@ body {
   opacity: 0.6;
 }
 
-.logo {
-  font-weight: 600;
-  font-size: 1.1rem;
+/* 3. Global Typography & Structure */
+h1 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
+h2 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: #333;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  color: #555;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #000;
+  border-color: #000;
+}
+
+/* 4. Hero Section (Index) */
 .hero {
   padding: 10vh 4vw;
   text-align: center;
@@ -55,8 +89,6 @@ body {
 
 .hero h1 {
   font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
@@ -67,7 +99,9 @@ body {
   margin-bottom: 2.5rem;
 }
 
-.cta {
+/* 5. Call to Action (CTA) & Links */
+.cta,
+button.cta {
   font-weight: 500;
   text-decoration: none;
   padding: 0.8rem 1.8rem;
@@ -75,73 +109,29 @@ body {
   border-radius: 8px;
   color: var(--text-color);
   transition: all 0.3s ease;
+  font-family: var(--font);
+  font-size: 1rem;
+  cursor: pointer;
+  background: transparent;
 }
 
-.cta:hover {
+.cta:hover,
+button.cta:hover {
   background: var(--text-color);
   color: var(--bg-color);
 }
 
-footer {
-  padding: 4rem 2rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-
-.about-container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 6rem 2rem;
-}
-
-.about-container h1 {
-  font-size: 2.5rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  letter-spacing: -0.02em;
-}
-
-.about-container h2 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  margin-top: 4rem;
-  margin-bottom: 1rem;
-}
-
-.intro-text {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 2rem;
-  max-width: 600px;
-}
-
-.bio p {
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-/* Optionnel si tu veux une image */
-.portrait {
-  margin-top: 4rem;
-  text-align: center;
-}
-
-.portrait img {
-  max-width: 180px;
-  border-radius: 50%;
-  opacity: 0.95;
+button.cta:focus {
+  outline: none;
 }
 
 .links {
   display: flex;
   flex-direction: column;
-  align-items: center; /* centre horizontalement en colonne */
+  align-items: center;
   gap: 1rem;
   margin-top: 2rem;
 }
-
 
 .external-link,
 .download-cv {
@@ -158,30 +148,68 @@ footer {
   border-color: var(--text-color);
 }
 
-/* Fade-in effect */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.projects-container {
-  max-width: 900px;
+/* 6. Page Containers */
+.about-container,
+.projects-container,
+.projects-detail,
+.contact-container,
+.project-single {
+  max-width: 720px; /* Base container width for content pages */
   margin: 0 auto;
   padding: 6rem 2rem;
+}
+
+/* About Page (about.html) */
+.about-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.about-container h2 {
+  font-size: 1.4rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+
+.intro-with-image {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.text-content {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.portrait-inline {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  opacity: 0.95;
+}
+
+.portrait-inline img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Projects Index Page (projects.html) */
+.projects-container {
+  max-width: 900px; /* Plus large pour les cartes */
   text-align: center;
 }
 
 .projects-container h1 {
   font-size: 2.5rem;
-  font-weight: 500;
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
 }
 
 .projects-intro {
@@ -189,8 +217,7 @@ footer {
   color: #555;
   margin-bottom: 4rem;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 4rem auto;
 }
 
 .project-links {
@@ -200,22 +227,24 @@ footer {
 }
 
 .project-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
   border: 1px solid #eee;
   border-radius: 12px;
   padding: 3rem 2rem;
-  text-decoration: none;
-  color: var(--text-color);
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
 }
 
 .project-card:hover {
   background: #f9f9f9;
   transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .project-card h2 {
   font-size: 1.5rem;
-  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
@@ -224,65 +253,47 @@ footer {
   color: #666;
 }
 
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .project-links {
-    grid-template-columns: 1fr;
-  }
+/* Projects Detail Pages (engineering.html, architecture.html) */
+.projects-detail {
+  max-width: 1000px; /* Plus large pour la grille de projets */
+  text-align: center;
 }
 
-.projects-detail {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 6rem 2rem;
-  text-align: center;
+.projects-detail h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr 1fr; /* Trois colonnes par défaut, plus logique */
+  gap: 2rem;
   margin-top: 4rem;
   text-align: left;
 }
 
-.project-card {
-  border: 1px solid #eee;
-  border-radius: 12px;
+.project-grid .project-card {
   padding: 2rem;
-  transition: box-shadow 0.3s ease;
-  background: #fff;
+  text-align: left; /* Aligner le texte à gauche dans la grille */
 }
 
-.project-card:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-}
-
-.project-card img {
+.project-grid .project-card img {
   width: 100%;
   height: auto;
-  max-height: 200px; /* ou 180px selon ton goût */
+  max-height: 200px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
 }
 
-.project-card h2 {
+.project-grid .project-card h2 {
   font-size: 1.2rem;
-  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
-.project-card p {
+.project-grid .project-card p {
   font-size: 0.95rem;
   color: #555;
-}
-
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .switch-section {
@@ -296,17 +307,13 @@ footer {
   color: #444;
 }
 
+/* Single Project Pages (pente-à-vis.html, etc.) */
 .project-single {
-  max-width: 720px; /* identique à about-container */
-  margin: 0 auto;
-  padding: 6rem 2rem;
   text-align: center;
 }
 
-
 .project-single h1 {
   font-size: 2.2rem;
-  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
@@ -322,11 +329,39 @@ footer {
   margin-bottom: 3rem;
 }
 
+.project-video {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: block;
+  margin-left: auto; /* Correction du décalage */
+  margin-right: auto;
+}
+
+.project-images-double {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.project-images-double img {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.project-description {
+  text-align: left; /* Alignement du texte de description */
+}
+
 .project-description h2 {
   font-size: 1.3rem;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  font-weight: 500;
 }
 
 .project-description p, .project-description ul {
@@ -339,13 +374,7 @@ footer {
   list-style: disc;
   padding-left: 1.5rem;
   margin: 2rem 0;
-  color: #333;
-  font-size: 1rem;
   line-height: 1.6;
-  text-align: left; /* Corrige l'alignement */
-  display: table;   /* Empêche le centrage visuel irrégulier */
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .project-description li {
@@ -363,31 +392,9 @@ footer {
   border-color: var(--accent-color);
 }
 
-.project-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 2rem;
-  transition: box-shadow 0.3s ease;
-  background: #fff;
-}
-
-.project-card:hover {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.contact-container {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 6rem 2rem;
-  text-align: left;
-}
-
+/* Contact Page (contact.html) */
 .contact-container h1 {
   font-size: 2.5rem;
-  font-weight: 500;
   margin-bottom: 1rem;
 }
 
@@ -426,117 +433,7 @@ footer {
   outline: none;
 }
 
-button.cta {
-  font-family: var(--font);
-  font-weight: 500;
-  font-size: 1rem;
-  background: transparent;
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  padding: 0.8rem 1.8rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: none;
-}
-
-button.cta:hover,
-button.cta:focus {
-  background: var(--text-color);
-  color: var(--bg-color);
-  outline: none;
-}
-
-html {
-  overflow-y: scroll;
-}
-
-.portrait {
-  margin: 3rem auto 0;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%; /* cercle parfait */
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  opacity: 0.95;
-}
-
-.portrait img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* pour que l'image remplisse bien le cercle */
-  display: block;
-}
-
-.intro-with-image {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
-}
-
-.text-content {
-  flex: 1 1 300px;
-  min-width: 280px;
-}
-
-.portrait-inline {
-  width: 150px;
-  height: 150px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  opacity: 0.95;
-}
-
-.portrait-inline img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.back-link {
-  display: inline-block;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
-  color: #555;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.back-link:hover {
-  color: #000;
-  border-color: #000;
-}
-
-.project-images-double {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.project-images-double img {
-  width: 100%;
-  max-width: 200px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.project-video {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  display: block;
-  margin-left: 2rem;
-}
-
+/* 7. Gallery & Lightbox */
 .project-gallery {
   margin-top: 2rem;
 }
@@ -548,7 +445,7 @@ html {
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  aspect-ratio: 3 / 2; /* Forcer un ratio uniforme */
+  aspect-ratio: 3 / 2;
   position: relative;
 }
 
@@ -591,6 +488,62 @@ html {
   cursor: pointer;
 }
 
+/* 8. Utility & Footer */
+/* Fade-in effect */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
 
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
+footer {
+  padding: 4rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
 
+/* 9. Responsiveness */
+@media (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: 1fr 1fr; /* Deux colonnes sous 900px */
+    }
+}
+
+@media (max-width: 768px) {
+  /* Navigation */
+  .navbar {
+    flex-direction: column;
+    padding: 1.5rem 4vw;
+  }
+  .nav-links {
+    margin-top: 1rem;
+    gap: 1.5rem;
+  }
+
+  /* Projects */
+  .project-links {
+    grid-template-columns: 1fr;
+  }
+  .project-grid {
+    grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+  }
+
+  /* About */
+  .intro-with-image {
+    flex-direction: column; /* Empilement sur mobile */
+    align-items: flex-start;
+  }
+  .portrait-inline {
+    margin-left: 0;
+  }
+  .text-content {
+      /* Réaligner le texte si le flex-wrap l'a décalé */
+      min-width: unset;
+  }
+}
