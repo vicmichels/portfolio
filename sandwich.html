@@ -50,8 +50,9 @@
     <!-- Galerie des visuels -->
     <section class="project-gallery">
       <h2>Plans d'assemblage et images</h2>
-        <div class="carousel-container">
-            <div class="carousel-track">
+          <div class="carousel-container">
+              <button class="nav-button prev-button">←</button>
+              <button class="nav-button next-button">→</button>
                 <img src="assets/images/proj2-detail.jpg" alt="Détail" />
                 <img src="assets/images/proj2-maquette.jpg" alt="Maquette" />
                 <img src="assets/images/proj2-etape1.png" alt="Etape 1" />
@@ -64,9 +65,11 @@
                 <img src="assets/images/proj2-coté.png" alt="Côté" />
                 <img src="assets/images/proj2-face.png" alt="Face" />
             </div>
-        </div>
-    </section>
-
+              
+              <div class="carousel-dots"></div>
+              
+          </div>
+      </section>
   </main>
 
     <div class="lightbox" id="lightbox">
@@ -78,42 +81,152 @@
     <p>© Vic Michels – Tous droits réservés</p>
   </footer>
   <script src="assets/js/scroll.js"></script>
-  <script>
+    <script>
+    const carouselContainer = document.querySelector('.carousel-container');
     const track = document.querySelector('.carousel-track');
     const slides = track.querySelectorAll('img');
+    const totalSlides = slides.length;
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    
     let current = 0;
+    let autoScrollInterval;
+    const autoScrollDuration = 3000; // 3 secondes
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Distance minimum (en pixels) pour valider un glissement
 
-    setInterval(() => {
-        current = (current + 1) % slides.length;
+    // --- Fonction de base pour le défilement ---
+    function updateCarousel() {
+        // Défilement de la piste
         track.style.transform = `translateX(-${current * 100}%)`;
-    }, 3000); // change d'image toutes les 3 secondes
-    </script>
+        
+        // Mise à jour des indicateurs de position
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === current);
+        });
+    }
 
-    <script>
-        const carouselImages = document.querySelectorAll('.carousel-track img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const closeLightbox = document.getElementById('closeLightbox');
-
-        carouselImages.forEach(img => {
-            img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightbox.style.display = 'flex';
+    // --- Création des indicateurs de position (dots) ---
+    function createDots() {
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                stopAutoScroll();
+                current = index;
+                updateCarousel();
+                resetAutoScroll();
             });
+            dotsContainer.appendChild(dot);
         });
+    }
 
-        closeLightbox.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-            lightboxImg.src = '';
-        });
+    // --- Fonctions de navigation ---
+    function moveToNextSlide() {
+        current = (current + 1) % totalSlides;
+        updateCarousel();
+    }
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-            lightbox.style.display = 'none';
-            lightboxImg.src = '';
+    function moveToPrevSlide() {
+        current = (current - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    // --- Gestion de l'Autoscroll ---
+    function startAutoScroll() {
+        // S'assurer qu'un seul intervalle est actif
+        stopAutoScroll(); 
+        autoScrollInterval = setInterval(moveToNextSlide, autoScrollDuration);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+    
+    // Réinitialise l'intervalle après une action manuelle
+    function resetAutoScroll() {
+        startAutoScroll();
+    }
+    
+    // --- Gestion du Touch/Swipe ---
+    carouselContainer.addEventListener('touchstart', (e) => {
+        // Pause auto-scroll when touch starts
+        stopAutoScroll(); 
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true}); // {passive: true} améliore la performance sur mobile
+
+    carouselContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        // Resume auto-scroll after swipe attempt
+        resetAutoScroll(); 
+    });
+
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+
+        if (Math.abs(deltaX) > swipeThreshold) {
+            if (deltaX > 0) {
+                // Glissement vers la droite (affiche la slide précédente)
+                moveToPrevSlide();
+            } else {
+                // Glissement vers la gauche (affiche la slide suivante)
+                moveToNextSlide();
             }
+        }
+    }
+    
+    // --- Initialisation des événements ---
+    // Clics manuels des boutons
+    prevButton.addEventListener('click', () => {
+        stopAutoScroll();
+        moveToPrevSlide();
+        resetAutoScroll();
+    });
+
+    nextButton.addEventListener('click', () => {
+        stopAutoScroll();
+        moveToNextSlide();
+        resetAutoScroll();
+    });
+    
+    // Démarrage initial
+    createDots();
+    startAutoScroll();
+
+    // --- Code Lightbox existant (à conserver) ---
+    const carouselImages = document.querySelectorAll('.carousel-track img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLightbox = document.getElementById('closeLightbox');
+
+    carouselImages.forEach(img => {
+        img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+        // Empêcher l'autoscroll pendant la lightbox
+        stopAutoScroll(); 
         });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        startAutoScroll(); // Redémarrer l'autoscroll
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        startAutoScroll(); // Redémarrer l'autoscroll
+        }
+    });
     </script>
+
 
 
 </body>
