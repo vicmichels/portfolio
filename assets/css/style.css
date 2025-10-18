@@ -426,7 +426,7 @@ button.cta:focus {
   max-width: 720px; 
   margin: 2rem auto;
   /* Crée 3 colonnes de taille égale (1fr) */
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(5, 1fr); 
   gap: 1.5rem; 
   margin-bottom: 3rem;
   justify-content: center; 
