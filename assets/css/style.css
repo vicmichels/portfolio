@@ -156,7 +156,7 @@ button.cta:focus {
 .project-single {
   max-width: 720px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 3rem 2rem; /* CORRECTION: Espace réduit en haut */
 }
 
 /* About Page (about.html) */
@@ -340,7 +340,7 @@ button.cta:focus {
 }
 
 /* ------------------------------------------------ */
-/* RETABLISSEMENT: Affichage de deux images (TWSS, Pente-à-vis) */
+/* Affichage de deux images (TWSS, Pente-à-vis) */
 /* ------------------------------------------------ */
 .project-images-double {
   display: flex;
@@ -348,19 +348,18 @@ button.cta:focus {
   margin-bottom: 2rem;
   justify-content: center;
   flex-wrap: wrap;
-  /* Assure le centrage pour deux images */
 }
 
 .project-images-double img {
   width: 100%;
-  max-width: 250px; /* Taille légèrement augmentée pour 2 images */
+  max-width: 250px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 /* ------------------------------------------------ */
 
-/* GRILLE RESTONOME: Desktop (5 images) */
+/* GRILLE RESTONOME: Desktop (5 images sur une ligne) */
 .project-images-grid {
   display: flex;
   max-width: 720px; 
@@ -368,18 +367,15 @@ button.cta:focus {
   gap: 1.5rem; 
   margin-bottom: 3rem;
   justify-content: center; 
-
-  /* Empêche le retour à la ligne si l'écran est grand, forçant la défilement si nécessaire */
-  flex-wrap: nowrap; 
-  /* Pour gérer les conteneurs qui dépassent */
-  overflow-x: auto; 
-  padding-bottom: 10px; /* Ajout d'un peu d'espace si une scrollbar apparaît */
+  flex-wrap: nowrap; /* Force la ligne unique */
+  overflow-x: auto; /* Permet le défilement horizontal */
+  padding-bottom: 10px; 
 }
 
 .project-images-grid img {
   flex-shrink: 0; 
   width: 100%; 
-  max-width: 110px;
+  max-width: 110px; /* Taille ajustée pour 5 images sur une ligne */
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
@@ -389,12 +385,16 @@ button.cta:focus {
 .project-images-carousel {
     display: none;
 }
+
 /* ANCIENNES CLASSES DE GRILLE (Masqué pour éviter les conflits) */
 .project-images-five, .project-images-double.grid-style {
   display: none; 
 }
 
 
+/* ------------------------------------------------ */
+/* Description de projet (Styles unifiés) */
+/* ------------------------------------------------ */
 .project-description {
   text-align: left;
 }
@@ -671,7 +671,7 @@ footer {
   .project-images-double {
       flex-direction: column;
       align-items: center;
-      gap: 2rem; /* Plus d'espace vertical */
+      gap: 2rem;
   }
   .project-images-double img {
       max-width: 80%;
