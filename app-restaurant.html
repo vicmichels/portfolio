@@ -25,13 +25,30 @@
     <h1>Restonome - Application de gestion pour restaurant</h1>
     <p class="project-subtitle">Android – Gestion des menus, recettes, marges</p>
 
-    <div class="project-images-five">
-    <img src="assets/images/restonome1.png" alt="App Restaurant - écran 1" />
-    <img src="assets/images/restonome2.png" alt="App Restaurant - écran 2" />
-    <img src="assets/images/restonome3.png" alt="App Restaurant - écran 3" />
-    <img src="assets/images/restonome4.png" alt="App Restaurant - écran 4" />
-    <img src="assets/images/restonome5.png" alt="App Restaurant - écran 5" />
-    </div>
+  <div class="project-images-grid">
+      <img src="assets/images/restonome1.png" alt="App Restaurant - écran 1" />
+      <img src="assets/images/restonome2.png" alt="App Restaurant - écran 2" />
+      <img src="assets/images/restonome3.png" alt="App Restaurant - écran 3" />
+      <img src="assets/images/restonome4.png" alt="App Restaurant - écran 4" />
+      <img src="assets/images/restonome5.png" alt="App Restaurant - écran 5" />
+  </div>
+
+  <div class="project-images-carousel">
+      <div class="carousel-container">
+          <button class="nav-button prev-button">←</button>
+          <button class="nav-button next-button">→</button>
+          
+          <div class="carousel-track">
+              <img src="assets/images/restonome1.png" alt="App Restaurant - écran 1" />
+              <img src="assets/images/restonome2.png" alt="App Restaurant - écran 2" />
+              <img src="assets/images/restonome3.png" alt="App Restaurant - écran 3" />
+              <img src="assets/images/restonome4.png" alt="App Restaurant - écran 4" />
+              <img src="assets/images/restonome5.png" alt="App Restaurant - écran 5" />
+          </div>
+          
+          <div class="carousel-dots"></div>
+      </div>
+  </div>
     
     <section class="project-description">
       <h2>Contexte</h2>
@@ -53,5 +70,105 @@
     <p>© Vic Michels – Tous droits réservés</p>
   </footer>
   <script src="assets/js/scroll.js"></script>
+  <script>
+    // Récupérer les éléments du carrousel créé pour mobile
+    const carouselContainer = document.querySelector('.project-images-carousel .carousel-container');
+    
+    // N'exécuter la logique JS que si le carrousel existe (i.e., si on est sur mobile)
+    if (carouselContainer) {
+        const track = carouselContainer.querySelector('.carousel-track');
+        const slides = track.querySelectorAll('img');
+        const totalSlides = slides.length;
+        const prevButton = carouselContainer.querySelector('.prev-button');
+        const nextButton = carouselContainer.querySelector('.next-button');
+        const dotsContainer = carouselContainer.querySelector('.carousel-dots');
+        
+        let current = 0;
+        let autoScrollInterval;
+        const autoScrollDuration = 3000; // 3 secondes
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const swipeThreshold = 50; // Distance minimum (en pixels) pour valider un glissement
+
+        // --- Fonction de base pour le défilement ---
+        function updateCarousel() {
+            track.style.transform = `translateX(-${current * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        }
+
+        // --- Création des indicateurs de position (dots) ---
+        function createDots() {
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    stopAutoScroll();
+                    current = index;
+                    updateCarousel();
+                    resetAutoScroll();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        // --- Fonctions de navigation ---
+        function moveToNextSlide() {
+            current = (current + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function moveToPrevSlide() {
+            current = (current - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // --- Gestion de l'Autoscroll ---
+        function startAutoScroll() {
+            stopAutoScroll(); 
+            autoScrollInterval = setInterval(moveToNextSlide, autoScrollDuration);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+        
+        function resetAutoScroll() {
+            startAutoScroll();
+        }
+        
+        // --- Gestion du Touch/Swipe ---
+        carouselContainer.addEventListener('touchstart', (e) => {
+            stopAutoScroll(); 
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            resetAutoScroll(); 
+        });
+
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            if (Math.abs(deltaX) > swipeThreshold) {
+                if (deltaX > 0) {
+                    moveToPrevSlide();
+                } else {
+                    moveToNextSlide();
+                }
+            }
+        }
+        
+        // --- Démarrage initial ---
+        createDots();
+        startAutoScroll();
+
+        // --- Lightbox (sans les images du carrousel pour éviter les bugs) ---
+        // Si vous voulez la lightbox sur les images de la grille, laissez-la ici
+    }
+  </script>
 </body>
 </html>
