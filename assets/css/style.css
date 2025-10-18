@@ -353,18 +353,21 @@ button.cta:focus {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
-.project-images-five {
+
+/* NOUVEAU: Style pour la GRILLE (Desktop) */
+.project-images-grid {
   display: grid;
-  /* Crée 3 colonnes de taille égale, avec un gap de 1rem */
-  grid-template-columns: repeat(5, 1fr); 
-  gap: 1rem;
-  margin-bottom: 2rem;
-  /* Centre le bloc de la grille */
+  /* Utilise un conteneur d'images plus large pour que 3 images tiennent côte à côte */
+  max-width: 720px; 
+  margin: 2rem auto;
+  /* Crée 3 colonnes de taille égale (1fr) */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; /* Augmente légèrement l'espacement */
+  margin-bottom: 3rem;
   justify-content: center; 
 }
 
-.project-images-five img {
-  /* Assure que les images sont centrées dans leur cellule de grille */
+.project-images-grid img {
   justify-self: center; 
   width: 100%; 
   max-width: 200px;
@@ -373,13 +376,33 @@ button.cta:focus {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Gère la réactivité sur les petits écrans pour passer à 2 colonnes */
-@media (max-width: 650px) {
-  .project-images-five {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* NOUVEAU: Cache le carrousel par défaut sur Desktop */
+.project-images-carousel {
+    display: none;
 }
 
+@media (max-width: 768px) {
+  /* ... autres styles de réactivité ... */
+
+  /* Cache la grille sur Mobile */
+  .project-images-grid {
+    display: none; 
+  }
+
+  /* Affiche le carrousel sur Mobile */
+  .project-images-carousel {
+    display: block; 
+    padding: 0 2rem; /* Ajoute un padding pour ne pas coller les bords */
+  }
+
+  /* Ajustements du carrousel sur Mobile */
+  .carousel-container {
+    max-width: 100%; /* S'étale au maximum de la largeur du viewport (avec padding) */
+    box-shadow: none; /* Enlève l'ombre si on veut un look plus épuré sur mobile */
+  }
+
+  /* ... Styles des boutons et dots mobiles existants ... */
+}
 .project-description {
   text-align: left;
 }
