@@ -35,9 +35,6 @@
 
   <div class="project-images-carousel">
       <div class="carousel-container">
-          <button class="nav-button prev-button">←</button>
-          <button class="nav-button next-button">→</button>
-          
           <div class="carousel-track">
               <img src="assets/images/restonome1.png" alt="App Restaurant - écran 1" />
               <img src="assets/images/restonome2.png" alt="App Restaurant - écran 2" />
@@ -79,8 +76,6 @@
         const track = carouselContainer.querySelector('.carousel-track');
         const slides = track.querySelectorAll('img');
         const totalSlides = slides.length;
-        const prevButton = carouselContainer.querySelector('.prev-button');
-        const nextButton = carouselContainer.querySelector('.next-button');
         const dotsContainer = carouselContainer.querySelector('.carousel-dots');
         
         let current = 0;

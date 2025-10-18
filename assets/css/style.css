@@ -360,12 +360,12 @@ button.cta:focus {
 }
 /* ------------------------------------------------ */
 
-/* GRILLE RESTONOME: Desktop (3 images) */
+/* GRILLE RESTONOME: Desktop (5 images) */
 .project-images-grid {
   display: grid;
   max-width: 720px; 
   margin: 2rem auto;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(5, 1fr); 
   gap: 1.5rem; 
   margin-bottom: 3rem;
   justify-content: center; 
