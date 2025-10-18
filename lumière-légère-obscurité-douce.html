@@ -81,7 +81,8 @@
     <p>© Vic Michels – Tous droits réservés</p>
   </footer>
   <script src="assets/js/scroll.js"></script>
-  <script>
+    <script>
+    const carouselContainer = document.querySelector('.carousel-container');
     const track = document.querySelector('.carousel-track');
     const slides = track.querySelectorAll('img');
     const totalSlides = slides.length;
@@ -92,6 +93,9 @@
     let current = 0;
     let autoScrollInterval;
     const autoScrollDuration = 3000; // 3 secondes
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Distance minimum (en pixels) pour valider un glissement
 
     // --- Fonction de base pour le défilement ---
     function updateCarousel() {
@@ -111,9 +115,10 @@
             dot.classList.add('dot');
             if (index === 0) dot.classList.add('active');
             dot.addEventListener('click', () => {
-                resetAutoScroll();
+                stopAutoScroll();
                 current = index;
                 updateCarousel();
+                resetAutoScroll();
             });
             dotsContainer.appendChild(dot);
         });
@@ -132,6 +137,8 @@
 
     // --- Gestion de l'Autoscroll ---
     function startAutoScroll() {
+        // S'assurer qu'un seul intervalle est actif
+        stopAutoScroll(); 
         autoScrollInterval = setInterval(moveToNextSlide, autoScrollDuration);
     }
 
@@ -141,22 +148,49 @@
     
     // Réinitialise l'intervalle après une action manuelle
     function resetAutoScroll() {
-        stopAutoScroll();
         startAutoScroll();
     }
     
+    // --- Gestion du Touch/Swipe ---
+    carouselContainer.addEventListener('touchstart', (e) => {
+        // Pause auto-scroll when touch starts
+        stopAutoScroll(); 
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true}); // {passive: true} améliore la performance sur mobile
+
+    carouselContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        // Resume auto-scroll after swipe attempt
+        resetAutoScroll(); 
+    });
+
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+
+        if (Math.abs(deltaX) > swipeThreshold) {
+            if (deltaX > 0) {
+                // Glissement vers la droite (affiche la slide précédente)
+                moveToPrevSlide();
+            } else {
+                // Glissement vers la gauche (affiche la slide suivante)
+                moveToNextSlide();
+            }
+        }
+    }
+    
     // --- Initialisation des événements ---
-    // Clics manuels
+    // Clics manuels des boutons
     prevButton.addEventListener('click', () => {
-        stopAutoScroll(); // Arrêter avant de naviguer
+        stopAutoScroll();
         moveToPrevSlide();
-        resetAutoScroll(); // Redémarrer l'auto-scroll
+        resetAutoScroll();
     });
 
     nextButton.addEventListener('click', () => {
-        stopAutoScroll(); // Arrêter avant de naviguer
+        stopAutoScroll();
         moveToNextSlide();
-        resetAutoScroll(); // Redémarrer l'auto-scroll
+        resetAutoScroll();
     });
     
     // Démarrage initial
@@ -191,7 +225,7 @@
         startAutoScroll(); // Redémarrer l'autoscroll
         }
     });
-  </script>
+    </script>
 
 </body>
 </html>

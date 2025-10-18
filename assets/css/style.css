@@ -547,7 +547,7 @@ footer {
       min-width: unset;
   }
 
-    /* --- Nouveaux Styles pour le Carrousel --- */
+  /* --- Styles du Carrousel (Navigation et Indicateurs) --- */
   .carousel-container {
       position: relative; /* Clé pour positionner les flèches */
   }
@@ -557,26 +557,28 @@ footer {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.7);
+      background: transparent; /* Rendu transparent sur desktop */
       border: none;
-      padding: 0.5rem 0.8rem;
       cursor: pointer;
       z-index: 10;
-      font-size: 1.5rem;
-      color: var(--text-color);
-      border-radius: 50%;
-      transition: background 0.3s, color 0.3s;
-      height: 40px;
+      font-size: 2rem; /* Taille de flèche augmentée */
+      color: #444; /* Couleur gris foncé pour l'icône */
+      transition: color 0.3s, background-color 0.3s, opacity 0.3s;
+      height: 60px; 
       width: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 0;
+      opacity: 0.8;
   }
 
+  /* Rendre les flèches plus visibles au survol */
   .nav-button:hover {
-      background: var(--text-color);
-      color: var(--bg-color);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-color);
+      border-radius: 5px;
+      opacity: 1;
   }
 
   .prev-button {
@@ -585,6 +587,23 @@ footer {
 
   .next-button {
       right: 1rem;
+  }
+
+  /* Styles pour mobile/petits écrans : rendre les boutons tactiles */
+  @media (max-width: 768px) {
+      .nav-button {
+          height: 50px;
+          width: 50px;
+          font-size: 1.8rem;
+          background: rgba(255, 255, 255, 0.7); /* Fond blanc semi-transparent */
+          border-radius: 50%; /* Bouton rond */
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          color: var(--text-color);
+      }
+      /* Pas de changement de fond au survol (le bouton est toujours visible) */
+      .nav-button:hover {
+          background: rgba(255, 255, 255, 0.9);
+      }
   }
 
   /* Styles des indicateurs de position (dots) */
@@ -601,15 +620,14 @@ footer {
   .dot {
       width: 10px;
       height: 10px;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid #aaa;
+      background: rgba(0, 0, 0, 0.2); /* Point gris transparent */
+      border: 1px solid transparent;
       border-radius: 50%;
       cursor: pointer;
-      transition: background 0.3s, border-color 0.3s;
+      transition: background 0.3s;
   }
 
   .dot.active {
       background: var(--accent-color);
-      border-color: var(--accent-color);
   }
 }
