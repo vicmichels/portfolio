@@ -154,7 +154,7 @@ button.cta:focus {
 .projects-detail,
 .contact-container,
 .project-single {
-  max-width: 720px;
+  max-width: 720px; /* Base container width for content pages */
   margin: 0 auto;
   padding: 6rem 2rem;
 }
@@ -203,7 +203,7 @@ button.cta:focus {
 
 /* Projects Index Page (projects.html) */
 .projects-container {
-  max-width: 900px;
+  max-width: 900px; /* Plus large pour les cartes */
   text-align: center;
 }
 
@@ -255,7 +255,7 @@ button.cta:focus {
 
 /* Projects Detail Pages (engineering.html, architecture.html) */
 .projects-detail {
-  max-width: 1000px;
+  max-width: 1000px; /* Plus large pour la grille de projets */
   text-align: center;
 }
 
@@ -266,7 +266,7 @@ button.cta:focus {
 
 .project-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr; /* Trois colonnes par défaut, plus logique */
   gap: 2rem;
   margin-top: 4rem;
   text-align: left;
@@ -274,7 +274,7 @@ button.cta:focus {
 
 .project-grid .project-card {
   padding: 2rem;
-  text-align: left;
+  text-align: left; /* Aligner le texte à gauche dans la grille */
 }
 
 .project-grid .project-card img {
@@ -439,32 +439,34 @@ button.cta:focus {
 }
 
 /* ------------------------------------------------ */
-/* CAROUSEL : Taille adaptable du carrousel et images */
+/* CORRECTION : Taille adaptable du carrousel et images */
 /* ------------------------------------------------ */
 .carousel-container {
   width: 100%;
-  max-width: 720px;
+  max-width: 720px; /* Utiliser la largeur du conteneur de page */
   margin: 2rem auto;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
+  /* Supprime l'aspect-ratio fixe pour que la hauteur s'adapte à l'image */
   height: auto; 
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.6s ease-in-out;
-  height: auto;
+  height: auto; /* La hauteur s'adapte à l'image courante */
   align-items: center;
 }
 
 .carousel-track img {
   width: 100%;
   height: auto;
+  /* Utilise CONTAINS pour que toute l'image soit visible */
   object-fit: contain; 
   flex-shrink: 0;
-  max-height: 500px;
+  max-height: 500px; /* Optionnel : limite de hauteur max pour les très grands écrans */
 }
 
 .lightbox {
@@ -494,39 +496,34 @@ button.cta:focus {
 }
 
 /* ------------------------------------------------ */
-/* CAROUSEL : Styles UNIFORMES des boutons (rond, blanc) */
+/* CORRECTION : Styles épurés des boutons */
 /* ------------------------------------------------ */
 .nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  background: transparent;
   border: none;
   cursor: pointer;
   z-index: 10;
-  font-size: 1.5rem;
-  
-  /* Style rond et blanc (anciennement style mobile) */
-  height: 48px;
-  width: 48px;
-  background: rgba(255, 255, 255, 0.9); 
-  border-radius: 50%;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  color: var(--text-color);
-  
-  transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+  font-size: 2.2rem;
+  /* Couleur d'icône plus discrète */
+  color: rgba(0, 0, 0, 0.6); 
+  transition: color 0.3s, background-color 0.3s, opacity 0.3s;
+  height: 60px; 
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  opacity: 1;
+  opacity: 1; /* Les boutons sont toujours visibles */
 }
 
-/* Effet de survol : le fond devient légèrement plus opaque */
+/* Effet de survol : Icône devient noire, fond très subtil */
 .nav-button:hover {
-  background: rgba(255, 255, 255, 1); 
+  background: rgba(0, 0, 0, 0.05); 
   color: var(--text-color);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  border-radius: 50%;
+  border-radius: 5px;
 }
 
 .prev-button {
@@ -551,8 +548,8 @@ button.cta:focus {
 .dot {
   width: 8px;
   height: 8px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid #aaa;
+  background: rgba(0, 0, 0, 0.2); /* Point gris transparent */
+  border: 1px solid transparent;
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.3s;
@@ -560,7 +557,6 @@ button.cta:focus {
 
 .dot.active {
   background: var(--accent-color);
-  border-color: var(--accent-color);
 }
 
 
@@ -622,7 +618,16 @@ footer {
     min-width: unset;
   }
 
-  /* Ajustements spécifiques mobile */
+  /* Carrousel sur mobile */
+  .nav-button {
+    height: 48px;
+    width: 48px;
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.9); /* Fond blanc pour facilité l'appui */
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    color: var(--text-color);
+  }
   .dot {
     width: 10px;
     height: 10px;
